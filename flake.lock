@@ -1,0 +1,63 @@
+{
+  "nodes": {
+    "comfyui-gguf": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768222528,
+        "narHash": "sha256-/ZwecgxTTMo9J1whdEJci8lEkOy/yP+UmjbpOAA3BvU=",
+        "owner": "city96",
+        "repo": "ComfyUI-GGUF",
+        "rev": "6ea2651e7df66d7585f6ffee804b20e92fb38b8a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "city96",
+        "repo": "ComfyUI-GGUF",
+        "rev": "6ea2651e7df66d7585f6ffee804b20e92fb38b8a",
+        "type": "github"
+      }
+    },
+    "llama-cpp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1729609142,
+        "narHash": "sha256-QL1scLPCXlTa00lJZjuxrTEYgr7Qqpw7hmW7X1h7tzk=",
+        "owner": "ggml-org",
+        "repo": "llama.cpp",
+        "rev": "c8c07d658a6cefc5a50cfdf6be7d726503612303",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ggml-org",
+        "repo": "llama.cpp",
+        "rev": "c8c07d658a6cefc5a50cfdf6be7d726503612303",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1787498568,
+        "narHash": "sha256-9i/VTdusq/+NM/tz+J1Re+ojkMB8MBf0QshnYfzHz30=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "56c02bc00adcf003215cc4bd996d6efaf4cff188",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "comfyui-gguf": "comfyui-gguf",
+        "llama-cpp": "llama-cpp",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
