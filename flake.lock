@@ -3,17 +3,17 @@
     "comfyui-gguf": {
       "flake": false,
       "locked": {
-        "lastModified": 1768222528,
-        "narHash": "sha256-/ZwecgxTTMo9J1whdEJci8lEkOy/yP+UmjbpOAA3BvU=",
-        "owner": "city96",
+        "lastModified": 1786738118,
+        "narHash": "sha256-uSMJbv3gGnr1rgFctTwgMqBIOf+Tud5XIuaE3slGRPs=",
+        "owner": "molbal",
         "repo": "ComfyUI-GGUF",
-        "rev": "6ea2651e7df66d7585f6ffee804b20e92fb38b8a",
+        "rev": "b6016439f135342819461256ec5f03fbb4003a8b",
         "type": "github"
       },
       "original": {
-        "owner": "city96",
+        "owner": "molbal",
         "repo": "ComfyUI-GGUF",
-        "rev": "6ea2651e7df66d7585f6ffee804b20e92fb38b8a",
+        "rev": "b6016439f135342819461256ec5f03fbb4003a8b",
         "type": "github"
       }
     },

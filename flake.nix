@@ -10,7 +10,7 @@
     };
 
     comfyui-gguf = {
-      url = "github:city96/ComfyUI-GGUF/6ea2651e7df66d7585f6ffee804b20e92fb38b8a";
+      url = "github:molbal/ComfyUI-GGUF/b6016439f135342819461256ec5f03fbb4003a8b";
       flake = false;
     };
   };
@@ -36,11 +36,16 @@
           pkgs = import nixpkgs { inherit system; };
         in
         pkgs.pkgsStatic.stdenv.mkDerivation {
-          pname = "comfyui-gguf-llama-quantize-static";
-          version = "b3962-comfyui-gguf";
+          pname = "molbal-comfyui-gguf-llama-quantize-static";
+          version = "b3962-krea2";
 
           src = llama-cpp;
           patches = [ "${comfyui-gguf}/tools/lcpp.patch" ];
+
+          postPatch = ''
+            grep -q 'LLM_ARCH_KREA2' src/llama.cpp
+            grep -q '"krea2"' src/llama.cpp
+          '';
 
           strictDeps = true;
           nativeBuildInputs = [
@@ -73,7 +78,7 @@
 
           installPhase = ''
             runHook preInstall
-            install -Dm755 bin/llama-quantize "$out/bin/llama-quantize"
+            install -Dm755 bin/llama-quantize "$out/bin/llama-quantize-krea2"
             runHook postInstall
           '';
 
@@ -81,7 +86,7 @@
           installCheckPhase = ''
             runHook preInstallCheck
 
-            binary="$out/bin/llama-quantize"
+            binary="$out/bin/llama-quantize-krea2"
             file "$binary" | grep -q 'statically linked'
 
             if readelf -l "$binary" | grep -q 'INTERP'; then
@@ -96,16 +101,17 @@
 
             help_output="$("$binary" --help 2>&1 || true)"
             grep -qi 'usage:' <<<"$help_output"
+            grep -q 'Q4_K_M' <<<"$help_output"
             grep -q 'Q5_K_M' <<<"$help_output"
 
             runHook postInstallCheck
           '';
 
           meta = {
-            description = "Static llama-quantize patched for ComfyUI diffusion GGUF models";
-            homepage = "https://github.com/city96/ComfyUI-GGUF";
+            description = "Static llama-quantize patched by molbal for ComfyUI diffusion GGUF models with Krea2 support";
+            homepage = "https://github.com/molbal/ComfyUI-GGUF";
             license = nixpkgs.lib.licenses.mit;
-            mainProgram = "llama-quantize";
+            mainProgram = "llama-quantize-krea2";
             platforms = systems;
           };
         };
@@ -119,7 +125,7 @@
       apps = eachSystem (system: {
         default = {
           type = "app";
-          program = "${mkLlamaQuantize system}/bin/llama-quantize";
+          program = "${mkLlamaQuantize system}/bin/llama-quantize-krea2";
         };
       });
 
