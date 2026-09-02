@@ -31,7 +31,7 @@
       eachSystem = nixpkgs.lib.genAttrs systems;
 
       mkLlamaQuantize =
-        system:
+        system: native:
         let
           pkgs = import nixpkgs { inherit system; };
         in
@@ -54,7 +54,7 @@
             "-DBUILD_SHARED_LIBS=OFF"
             "-DGGML_CCACHE=OFF"
             "-DGGML_CUDA=OFF"
-            "-DGGML_NATIVE=OFF"
+            "-DGGML_NATIVE=${if native then "ON" else "OFF"}"
             "-DGGML_OPENMP=OFF"
             "-DLLAMA_BUILD_EXAMPLES=ON"
             "-DLLAMA_BUILD_TESTS=OFF"
@@ -112,19 +112,20 @@
     in
     {
       packages = eachSystem (system: {
-        default = mkLlamaQuantize system;
-        llama-quantize-static = mkLlamaQuantize system;
+        default = mkLlamaQuantize system false;
+        llama-quantize-static = mkLlamaQuantize system false;
+        native = mkLlamaQuantize system true;
       });
 
       apps = eachSystem (system: {
         default = {
           type = "app";
-          program = "${mkLlamaQuantize system}/bin/llama-quantize";
+          program = "${mkLlamaQuantize system false}/bin/llama-quantize";
         };
       });
 
       checks = eachSystem (system: {
-        static-binary = mkLlamaQuantize system;
+        static-binary = mkLlamaQuantize system false;
       });
     };
 }
