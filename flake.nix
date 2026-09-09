@@ -10,7 +10,7 @@
     };
 
     comfyui-gguf = {
-      url = "github:molbal/ComfyUI-GGUF/b6016439f135342819461256ec5f03fbb4003a8b";
+      url = "github:molbal/ComfyUI-GGUF/c6e14d9c2475bb39a100f85d582e224c6e884f80";
       flake = false;
     };
   };

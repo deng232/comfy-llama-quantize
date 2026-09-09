@@ -7,7 +7,7 @@ GGUF models.
 
 - [`llama.cpp` b3962](https://github.com/ggml-org/llama.cpp/tree/c8c07d658a6cefc5a50cfdf6be7d726503612303)
 - `main`: [`city96/ComfyUI-GGUF`](https://github.com/city96/ComfyUI-GGUF/tree/6ea2651e7df66d7585f6ffee804b20e92fb38b8a)
-- `krea2-patch`: [`molbal/ComfyUI-GGUF`](https://github.com/molbal/ComfyUI-GGUF/tree/b6016439f135342819461256ec5f03fbb4003a8b), with Krea 2 support
+- `krea2-patch`: [`molbal/ComfyUI-GGUF`](https://github.com/molbal/ComfyUI-GGUF/tree/c6e14d9c2475bb39a100f85d582e224c6e884f80), with Krea 2 support
 
 ## Builds
 
