@@ -115,10 +115,37 @@
             platforms = systems;
           };
         };
+
+      mkConverter =
+        system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+        in
+        pkgs.writeShellApplication {
+          name = "converter";
+          runtimeInputs = [
+            pkgs.python312
+            pkgs.uv
+          ];
+          text = ''
+            export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath [
+              pkgs.stdenv.cc.cc.lib
+              pkgs.zlib
+            ]}:''${LD_LIBRARY_PATH:-}
+            exec uv run --no-project --python ${pkgs.python312}/bin/python3 \
+              --index https://download.pytorch.org/whl/cpu \
+              --with 'gguf>=0.13.0' \
+              --with torch \
+              --with tqdm \
+              --with safetensors \
+              ${comfyui-gguf}/tools/convert.py "$@"
+          '';
+        };
     in
     {
       packages = eachSystem (system: {
         default = mkLlamaQuantize system false;
+        converter = mkConverter system;
         llama-quantize-static = mkLlamaQuantize system false;
         native = mkLlamaQuantize system true;
       });
@@ -127,6 +154,11 @@
         default = {
           type = "app";
           program = "${mkLlamaQuantize system false}/bin/llama-quantize-krea2";
+        };
+        #UV_CACHE_DIR=/data/.cache/uv specify cache location if not default ~/.cache/uv
+        converter = {
+          type = "app";
+          program = "${mkConverter system}/bin/converter";
         };
       });
 
